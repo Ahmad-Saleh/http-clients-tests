@@ -1,13 +1,15 @@
 package com.example.httpclientstests;
 
+import com.example.httpclientstests.repositories.PaymentResponseRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 @Slf4j
-public class ResponseHandler {
+public class ResponseHandler implements Serializable {
 
     private final AtomicInteger counter;
     private final PaymentResponseRepository repository;

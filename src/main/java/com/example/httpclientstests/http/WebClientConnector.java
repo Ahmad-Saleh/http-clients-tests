@@ -1,5 +1,8 @@
-package com.example.httpclientstests;
+package com.example.httpclientstests.http;
 
+import com.example.httpclientstests.Payment;
+import com.example.httpclientstests.PaymentResponse;
+import com.example.httpclientstests.ResponseHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -23,11 +26,14 @@ public class WebClientConnector {
         this.middlewareUrl = middlewareUrl;
         this.apiUrl = apiUrl;
         this.responseHandler = responseHandler;
+
         ExchangeStrategies jacksonStrategy = ExchangeStrategies.builder()
                 .codecs(config -> {
                     config.defaultCodecs().jackson2JsonEncoder(new Jackson2JsonEncoder(objectMapper, MediaType.APPLICATION_JSON));
                     config.defaultCodecs().jackson2JsonDecoder(new Jackson2JsonDecoder(objectMapper, MediaType.APPLICATION_JSON));
                 }).build();
+
+
         this.client = WebClient.builder().exchangeStrategies(jacksonStrategy).build();
     }
 
@@ -35,7 +41,6 @@ public class WebClientConnector {
         client.post().uri(middlewareUrl + apiUrl)
                 .bodyValue(payment)
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(PaymentResponse.class))
-                .subscribe(paymentResponse -> responseHandler.handleResponse(paymentResponse));
+                .subscribe(responseHandler::handleResponse);
     }
-
 }

@@ -1,20 +1,20 @@
-package com.example.httpclientstests;
+package com.example.httpclientstests.controllers;
 
+import com.example.httpclientstests.Payment;
+import com.example.httpclientstests.repositories.PaymentsRepository;
+import com.example.httpclientstests.PaymentsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ForkJoinPool;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController

@@ -1,5 +1,7 @@
 package com.example.httpclientstests;
 
+import com.example.httpclientstests.http.FeignConnector;
+import com.example.httpclientstests.http.WebClientConnector;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
